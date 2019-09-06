@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Nave Espacial Controlável</title>
+    <script src="js/animacao.js"></script>
+    <script src="js/teclado.js"></script>
+    <script src="js/nave.js"></script>
+    <script src="js/tiro.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas_nave" width="500" height="500"></canvas>
+
+    <script>
+        //referencia do canvas
+        var canvas = document.getElementById('canvas_nave');
+        var context = canvas.getContext('2d');
+
+        //teclado e animacao (game engine)
+        var teclado = new Teclado(document);
+        var animacao = new Animacao(context);
+
+        //sprite da nave e sua imagem
+        var imagem = new Image();
+        imagem.src = 'imagens/nave.png';
+        var nave = new Nave(context, teclado, imagem);
+        animacao.novoSprite(nave);
+
+        //evento de tiro da nave
+        teclado.disparou(ESPACO, function(){
+            nave.atirar();
+        });
+
+        //quando carregar a imagem, iniciar a animacao
+        imagem.onload = function () {
+            //centralizada na horizontal
+            //alinhada na vertical
+            nave.x = ((canvas.width / 2) - (imagem.width / 2));
+            nave.y = ((canvas.height / 2) - (imagem.height / 2));
+            nave.velocidade = 5;
+            animacao.ligar();
+        }
+    </script>
+</body>
+
+</html>

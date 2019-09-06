@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Fundos rolando infinitamente no Parallax</title>
+    <script src="js/animacao.js"></script>
+    <script src="js/fundo.js"></script>
+</head>
+<body>
+    <canvas id="canvas_fundo" width="500" height="500"></canvas>
+
+    <script>
+        //instanciando os objetos das imagens
+        var espaco = new Image();
+        var estrelas = new Image();
+        var nuvens = new Image();
+
+        espaco.src = 'imagens/fundo-espaco.png';
+        estrelas.src = 'imagens/fundo-estrelas.png';
+        nuvens.src = 'imagens/fundo-nuvens.png';
+
+        //carregando imagens
+        var carregadas = 0;
+        var total = 3;
+
+        espaco.onload = carregando;
+        estrelas.onload = carregando;
+        nuvens.onload = carregando;
+
+        function carregando(){
+            carregadas++;
+            if(carregadas==total) iniciar();
+        }
+
+        function iniciar(){
+            //referencia do canvas
+            var canvas = document.getElementById('canvas_fundo');
+            var context = canvas.getContext('2d');
+
+            //passando o context e a imagem para os objetos Fundo
+            var fundoEspaco = new Fundo(context, espaco);
+            var fundoEstrelas = new Fundo(context, estrelas);
+            var fundoNuvens = new Fundo(context, nuvens);
+
+            //cada um a uma velocidade diferente
+            fundoEspaco.velocidade = 3;
+            fundoEstrelas.velocidade = 7;
+            fundoNuvens.velocidade = 10;
+
+            var animacao = new Animacao(context);
+            animacao.novoSprite(fundoEspaco);
+            animacao.novoSprite(fundoEstrelas);
+            animacao.novoSprite(fundoNuvens);
+
+            animacao.ligar();
+        }
+    </script>
+</body>
+</html>

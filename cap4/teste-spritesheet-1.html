@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testando a classe Spritesheet</title>
+	<script src="js/spritesheet.js"></script>
+</head>
+<body>
+	<canvas id="canvas-spritesheet-1" width="500" height="500"></canvas>
+
+	<script>
+		/*
+		* vamos tentar mandar na Spritesheet
+		* da maneira mais simples
+		*/
+
+
+		var context = document.getElementById('canvas-spritesheet-1').getContext('2d');
+		var imagem = new Image();
+		imagem.src = 'sprites/spritesheet.png';
+
+		//quero passar: context, imagem, linhas, colunas
+		var folha = new Spritesheet(context,imagem,3,8);
+
+		//duracao de cada quadro
+		folha.intervalo = 60;
+
+		//correndo para a direita
+		folha.linha = 1;
+
+		//animacao
+		imagem.onload = gameLoop;
+		var gameLoop = function(){
+			context.clearRect(0,0,context.canvas.width,context.canvas.height);
+
+			//avancar na animacao
+			folha.proximoQuadro();
+
+			//onde desenhar o quadro atual
+			folha.desenhar(100,100);
+			requestAnimationFrame(gameLoop);
+		};
+	</script>
+</body>
+</html>

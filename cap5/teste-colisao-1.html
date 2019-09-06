@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/colisor.js"></script>
+    <script src="js/bola.js"></script>
+</head>
+<body>
+    <canvas id="canvas_colisao" width="1000" height="1000"></canvas>
+
+    <script>
+        //referencia para o canvas
+        var canvas = document.getElementById('canvas_colisao');
+        var context = canvas.getContext('2d');
+
+        //instanciando alguns objetos da classe Bola
+        var bola1 = new Bola(context);
+        bola1.x = 200;
+        bola1.y = 200;
+        bola1.velocidadeX = 10;
+        bola1.velocidadeY = -5;
+        bola1.cor = 'blue';
+        bola1.raio = 20;
+
+        var bola2 = new Bola(context);
+        bola2.x = 300;
+        bola2.y = 300;
+        bola2.velocidadeX = -5;
+        bola2.velocidadeY = 10;
+        bola2.cor = 'red';
+        bola2.raio = 30;
+
+        //instanciando o objeto da classe Colisor
+        var colisor = new Colisor();
+        colisor.novoSprite(bola1);
+        colisor.novoSprite(bola2);
+
+        //criando loop da animacao
+        requestAnimationFrame(animar);
+
+        function animar(){
+            //limpando a tela
+            context.clearRect(0,0,canvas.width,canvas.height);
+
+            //atualizando os sprites
+            bola1.atualizar();
+            bola2.atualizar();
+
+            //desenhando os sprites
+            bola1.desenhar();
+            bola2.desenhar();
+
+            //processar colisoes
+            colisor.processar();
+
+            requestAnimationFrame(animar);
+        }
+    </script>
+</body>
+</html>

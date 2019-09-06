@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Movimentando personagem com keydown</title>
+</head>
+<body>
+    <canvas id="canvas-teclado-1" width="500" height="500"></canvas>
+
+    <script>
+        /*
+        * acoes de interacao com o teclado
+        */
+
+        //referencias do canvas
+        var canvas = document.getElementById('canvas-teclado-1');
+        var context = canvas.getContext('2d');
+
+        //posicao inicial do personagem
+        var posicao = 0;
+        desenharPersonagem();
+
+        document.addEventListener('keydown', function(evento){
+            if(evento.keyCode==37){ //seta para esquerda
+                posicao -= 10;
+                desenharPersonagem();
+            }else if(evento.keyCode==39){ //seta para direita
+                posicao += 10;
+                desenharPersonagem();
+            }
+        });
+
+        //um personagem nao muito simpatico, mas...
+        function desenharPersonagem(){
+            context.clearRect(0,0,canvas.widht,canvas.height);
+            context.fillRect(posicao,100,20,50);
+        }
+    </script>
+</body>
+</html>

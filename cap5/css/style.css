@@ -1,0 +1,9 @@
+#canvas_colisao {
+    display: block;
+    width: 100%;
+    Height: 100%;
+    border: 10px solid #000000;
+    position: fixed; /*ou position: absolute;*/
+     top: 0;
+     left: 0;
+}
