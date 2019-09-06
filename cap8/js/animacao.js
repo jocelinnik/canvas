@@ -34,6 +34,11 @@ Animacao.prototype = {
         // Posso continuar?
         if (!this.ligado) return;
 
+        //pegando instante do ciclo atual
+        var agora = new Date().getTime();
+        if(this.ultimoCiclo==0) this.ultimoCiclo = agora;
+        this.decorrido = agora - this.ultimoCiclo;
+
         // Atualizamos o estado dos sprites
         for (var i in this.sprites) this.sprites[i].atualizar();
 
@@ -45,6 +50,9 @@ Animacao.prototype = {
 
         //processamento de exclusoes
         this.processarExclusoes();
+
+        //atualizando o instante do ultimo ciclo
+        this.ultimoCiclo = agora;
 
         // Chamamos o próximo ciclo
         var animacao = this;

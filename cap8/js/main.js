@@ -15,7 +15,7 @@ function carregarImagens(){
         espaco: 'fundo-espaco.png',
         estrelas: 'fundo-estrelas.png',
         nuvens: 'fundo-nuvens.png',
-        nave: 'nave.png',
+        nave: 'nave-spritesheet.png',
         ovni: 'ovni.png'
     };
 
@@ -59,14 +59,14 @@ function iniciarObjetos(){
 
 function configuracoesIniciais(){
     //Fundos
-    espaco.velocidade = 3;
-    estrelas.velocidade = 5;
-    nuvens.velocidade = 10;
+    espaco.velocidade = 60;
+    estrelas.velocidade = 150;
+    nuvens.velocidade = 500;
 
     //Nave
-    nave.x = (canvas.width / 2) - (imagens.nave.width / 2);
-    nave.y = canvas.height - imagens.nave.height;
-    nave.velocidade = 5;
+    nave.x = (canvas.width / 2) - 18;
+    nave.y = canvas.height - 48;
+    nave.velocidade = 200;
 
     //Tiro
     teclado.disparou(ESPACO, function(){
