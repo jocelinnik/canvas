@@ -30,7 +30,7 @@ Spritesheet.prototype = {
 	},
 	desenhar: function(x, y){
 		var largura = this.imagem.width / this.numColunas;
-		var altura = this.imagem.heigth / this.numLinhas;
+		var altura = this.imagem.height / this.numLinhas;
 
 		this.context.drawImage(
 			this.imagem,

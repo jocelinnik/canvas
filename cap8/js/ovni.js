@@ -1,6 +1,7 @@
-function Ovni(context, imagem){
+function Ovni(context, imagem, imgExplosao){
     this.context = context;
     this.imagem = imagem;
+    this.imgExplosao = imgExplosao;
     this.x = 0;
     this.y = 0;
     this.velocidade = 0;
@@ -8,7 +9,7 @@ function Ovni(context, imagem){
 
 Ovni.prototype = {
     atualizar: function(){
-        this.y += this.velocidade;
+        this.y += this.velocidade * this.animacao.decorrido / 1000;
 
         if(this.y > this.context.canvas.height){
             this.animacao.excluirSprite(this);
@@ -28,13 +29,13 @@ Ovni.prototype = {
         ];
 
         //desenhando os retangulos para visualizacao
-        var ctx = this.context;
+        /*var ctx = this.context;
         for (var i in rets) {
             ctx.save();
             ctx.strokeStyle = 'yellow';
             ctx.strokeRect(rets[i].x, rets[i].y, rets[i].largura, rets[i].altura);
             ctx.restore();
-        }
+        }*/
 
         return rets;
     },
@@ -45,6 +46,9 @@ Ovni.prototype = {
             this.colisor.excluirSprite(this);
             this.animacao.excluirSprite(outro);
             this.colisor.excluirSprite(outro);
+
+            var explosao = new Explosao(this.context, this.imgExplosao, this.x, this.y);
+            this.animacao.novoSprite(explosao);
         }
     }
 };

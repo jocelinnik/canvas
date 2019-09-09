@@ -1,5 +1,6 @@
 function Colisor(){
     this.sprites = [];
+    this.aoColidir = null;
     this.spritesExcluir = [];
 }
 
@@ -63,6 +64,7 @@ Colisor.prototype = {
         //obter os retangulos de colisao de cada sprite
         var rets1 = sprite1.retangulosColisao();
         var rets2 = sprite2.retangulosColisao();
+        var colidiu = false;
 
         //testar as colisoes entre eles
         colisoes:
@@ -73,6 +75,9 @@ Colisor.prototype = {
                     //eles colidem, vamos notifica-los
                     sprite1.colidiuCom(sprite2);
                     sprite2.colidiuCom(sprite1);
+
+                    //tratador geral
+                    if(this.aoColidir) this.aoColidir(sprite1, sprite2);
 
                     //nao precisa terminar de ver todos os retangulos
                     break colisoes;

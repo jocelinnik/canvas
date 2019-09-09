@@ -1,10 +1,10 @@
 function Animacao(context) {
     this.context = context;
     this.sprites = [];
+    this.ligado = false;
     this.spritesExcluir = [];
     this.processamentos = [];
     this.processamentosExcluir = [];
-    this.ligado = false;
     this.ultimoCiclo = 0;
     this.decorrido = 0;
 }
@@ -24,6 +24,7 @@ Animacao.prototype = {
         this.processamentosExcluir.push(processo);
     },
     ligar: function () {
+        this.ultimoCiclo = 0;
         this.ligado = true;
         this.proximoFrame();
     },

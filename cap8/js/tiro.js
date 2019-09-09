@@ -1,3 +1,8 @@
+var SOM_TIRO = new Audio();
+SOM_TIRO.src = 'sons_musicas/tiro.mp3';
+SOM_TIRO.volume = 0.2;
+SOM_TIRO.load();
+
 function Tiro(context, nave){
     this.context = context;
     this.nave = nave;
@@ -7,15 +12,19 @@ function Tiro(context, nave){
     this.altura = 10;
     this.x = nave.x + 18;
     this.y = nave.y - this.altura;
-    this.velocidade = 10;
+    this.velocidade = 400;
 
     //cor do tiro
     this.cor = 'yellow';
+
+    //ativar o som do tiro
+    SOM_TIRO.currentTime = 0.0;
+    SOM_TIRO.play();
 }
 
 Tiro.prototype = {
     atualizar: function(){
-        this.y -= this.velocidade;
+        this.y -= this.velocidade * this.animacao.decorrido / 1000;
 
         //excluir o tiro quando sumir da tela
         if(this.y < -this.altura){

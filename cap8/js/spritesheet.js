@@ -6,6 +6,7 @@ function Spritesheet(context, imagem, linhas, colunas) {
 	this.intervalo = 0;
 	this.linha = 0;
 	this.coluna = 0;
+	this.fimDoCiclo = null;
 }
 
 Spritesheet.prototype = {
@@ -17,12 +18,15 @@ Spritesheet.prototype = {
 		if (!this.ultimoTempo) this.ultimoTempo = agora;
 
 		//ja eh hora de mudar de coluna?
-		if ((agora - this.ultimoTempo) < this.intervalo) return;
+		if (agora - this.ultimoTempo < this.intervalo) return;
 
-		if (this.coluna < (this.numColunas - 1)) {
+		if (this.coluna < this.numColunas - 1) {
 			this.coluna++;
 		} else {
 			this.coluna = 0;
+
+			//avisar que acabou um ciclo
+			if(this.fimDoCiclo) this.fimDoCiclo();
 		}
 
 		//guardar hora da ultima mudanca
@@ -30,12 +34,12 @@ Spritesheet.prototype = {
 	},
 	desenhar: function (x, y) {
 		var largura = this.imagem.width / this.numColunas;
-		var altura = this.imagem.heigth / this.numLinhas;
+		var altura = this.imagem.height / this.numLinhas;
 
 		this.context.drawImage(
 			this.imagem,
-			(largura * this.coluna),
-			(altura * this.linha),
+			largura * this.coluna,
+			altura * this.linha,
 			largura,
 			altura,
 			x,

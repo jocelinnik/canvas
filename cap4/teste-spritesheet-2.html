@@ -21,10 +21,10 @@
 		var animacao = new Animacao(context);
 
 		var imagem = new Image();
-		imagem.src = 'sprites/spritesheet.png';
-		var sonic = new Sonic(context,teclado,imagem);
-
+		imagem.src = 'spritesheet.png';
+		
 		//setando valores do objeto sonic
+		var sonic = new Sonic(context,teclado,imagem);
 		sonic.x = 0;
 		sonic.y = 200;
 		animacao.novoSprite(sonic);

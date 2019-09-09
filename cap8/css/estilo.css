@@ -1,0 +1,27 @@
+#link_jogar{
+    /* inicia oculto */
+
+    display: none;
+
+    /* cores e fundo */
+    color: yellow;
+    background: url('../imagens/botao-jogar.png');
+
+    /* fonte */
+    font-size: 20px;
+    font-family: sans-serif;
+
+    /* sem sublinhado e com sombra */
+    text-decoration: none;
+    text-shadow: 2px 2px 5px black;
+
+    /* posicionamento */
+    position: absolute;
+    left: 220px;
+    top: 330px;
+
+    /* a imagem do botao eh 72x72, descontamos os paddings */
+    width: 52px;
+    height: 26px;
+    padding: 23px 10px;
+}
